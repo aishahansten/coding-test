@@ -22,21 +22,16 @@ for i in range(N):
 comb_chicken = []
 stores = []
 idx = 0
-# visited = [False]*len(chickens)
 def combination(stores, idx):
     if len(stores) == M:
         comb_chicken.append(stores[:])
         return
    
     for i in range(idx, len(chickens)):
-        # if visited[i]:
-        #     continue
         stores.append(chickens[i])
-        # visited[i] = True
         combination(stores, i + 1)
         stores.pop()
-        # visited[i] = False
-
+    
 combination(stores, idx)
 
 # 치킨거리 최솟값 계산
