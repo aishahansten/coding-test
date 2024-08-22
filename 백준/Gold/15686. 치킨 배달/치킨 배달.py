@@ -18,7 +18,8 @@ for i in range(N):
 # print(chickens)
 
 # 2. M 개 치킨집 조합
-comb_chicken = combinations(chickens, M)
+comb_chicken = list(combinations(chickens, M))
+
 # stores = []
 # visited = [False]*len(chickens)
 # def combination(stores):
@@ -54,8 +55,8 @@ def findMin(chickenstores):
             totalminlength += minlength
     return totalminlength
 ans = int(1e9)
-for comb in comb_chicken:
-    temp = findMin(comb)
+for i in range(len(comb_chicken)):
+    temp = findMin(comb_chicken[i])
     if temp < ans:
         ans = temp
     # findmin[i] = temp
