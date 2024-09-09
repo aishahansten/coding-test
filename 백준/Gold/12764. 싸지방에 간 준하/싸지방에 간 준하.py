@@ -1,22 +1,30 @@
-import heapq, sys
+import sys
 input = sys.stdin.readline
-n = int(input())
-arr = [list(map(int, input().split())) for _ in range(n)]
-arr.sort(key = lambda x: x[0])
-minH = []
-seat = []
-for i in range(1, n+1):
-    heapq.heappush(seat, i)
-count = [0 for _ in range(n+1)]
-max_count = 0
-for x in arr:
-    while minH and x[0] >= minH[0][0]:
-        end_time, s = heapq.heappop(minH)
-        heapq.heappush(seat, s)
-    s = heapq.heappop(seat)
-    heapq.heappush(minH, [x[1], s])
-    max_count = max(max_count, len(minH))
-    count[s] += 1
-print(max_count)
-for i in range(1, max_count+1):
-    print(count[i], end=' ')
+import heapq
+
+N = int(input())
+X = 0
+how_many_people_have_used = [0]*N
+current_status_of_computers = [0]*N
+hq = []
+
+for _ in range(N):
+    P, Q = map(int, input().split())
+    heapq.heappush(hq, (P,Q))
+
+while hq:
+    now = heapq.heappop(hq)
+    for i in range(len(current_status_of_computers)):
+        if current_status_of_computers[i] <= now[0]:
+            if current_status_of_computers[i] == 0:
+                X+=1
+            current_status_of_computers[i] = now[1]
+            how_many_people_have_used[i] += 1
+            break
+
+print(X)
+for j in how_many_people_have_used:
+    if j == 0:
+        pass
+    else:
+        print(j, end=' ')
