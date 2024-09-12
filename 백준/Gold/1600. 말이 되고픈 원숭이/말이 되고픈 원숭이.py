@@ -15,23 +15,13 @@ hy = [-2, -1, 1, 2, 2, 1, -1, -2]
 def BFS():
     visited = [[[0]*(K+1) for _ in range(W)] for _ in range(H)]
     q = deque([[0,0,0]])
-
-    visited[0][0][0] = 1
+    visited[0][0][0] = 0
 
     while q:
         x, y, z = q.popleft()
         if x == H-1 and y == W-1:
-            return visited[x][y][z] -1
+            return visited[x][y][z] 
         
-        
-        for r in range(4):
-            nx = x + dx[r]
-            ny = y + dy[r]
-            if 0 <= nx < H and 0 <= ny < W:
-                if not matrix[nx][ny] and not visited[nx][ny][z]:
-                    visited[nx][ny][z] = visited[x][y][z]+1
-                    q.append([nx, ny, z])
-
         if z < K:
             for k in range(8):
                 hi = x + hx[k]
@@ -40,6 +30,14 @@ def BFS():
                     if matrix[hi][hj] != 1 and not visited[hi][hj][z+1]:
                         visited[hi][hj][z+1] = visited[x][y][z] + 1
                         q.append([hi, hj, z+1])
+
+        for r in range(4):
+            nx = x + dx[r]
+            ny = y + dy[r]
+            if 0 <= nx < H and 0 <= ny < W:
+                if not matrix[nx][ny] and not visited[nx][ny][z]:
+                    visited[nx][ny][z] = visited[x][y][z]+1
+                    q.append([nx, ny, z])
 
     return -1
 
