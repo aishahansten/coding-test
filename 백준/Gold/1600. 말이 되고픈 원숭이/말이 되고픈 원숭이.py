@@ -23,15 +23,7 @@ def BFS():
         if x == H-1 and y == W-1:
             return visited[x][y][z] -1
         
-        if z < K:
-            for k in range(8):
-                hi = x + hx[k]
-                hj = y + hy[k]
-                if 0 <= hi < H and 0 <= hj < W:
-                    if matrix[hi][hj] != 1 and not visited[hi][hj][z+1]:
-                        visited[hi][hj][z+1] = visited[x][y][z] + 1
-                        q.append([hi, hj, z+1])
-
+        
         for r in range(4):
             nx = x + dx[r]
             ny = y + dy[r]
@@ -40,6 +32,14 @@ def BFS():
                     visited[nx][ny][z] = visited[x][y][z]+1
                     q.append([nx, ny, z])
 
+        if z < K:
+            for k in range(8):
+                hi = x + hx[k]
+                hj = y + hy[k]
+                if 0 <= hi < H and 0 <= hj < W:
+                    if matrix[hi][hj] != 1 and not visited[hi][hj][z+1]:
+                        visited[hi][hj][z+1] = visited[x][y][z] + 1
+                        q.append([hi, hj, z+1])
 
     return -1
 
