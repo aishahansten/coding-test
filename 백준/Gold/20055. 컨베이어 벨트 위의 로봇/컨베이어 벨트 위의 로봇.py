@@ -11,7 +11,8 @@ turn = 0
 while True:
     
     # 1. 회전하기
-    '''
+    
+    # 직접회전 시간초과
     temp = durability[-1] 
     for i in range(2*N-2, -1, -1):
         durability[i+1] = durability[i]
@@ -20,9 +21,10 @@ while True:
     for j in range(N-2, -1, -1):
         is_robot[j+1] = is_robot[j]
     is_robot[0] = False
-    '''
-    durability.rotate(1)
-    is_robot.rotate(1)
+    
+    # 함수사용
+    # durability.rotate(1)
+    # is_robot.rotate(1)
 
     # 내리는위치는 항상 내려줌
     if is_robot[N-1]:
